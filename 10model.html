@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Form</title>
+</head>
+<body>
+    <h1>Prediction Form</h1>
+    <form id="predictionForm">
+        <label for="sample_type">Sample Type:</label>
+        <select name="sample_type" id="sample_type">
+            <option value="blood">Blood</option>
+            <option value="serum">Serum</option>
+            <option value="urine">Urine</option>
+        </select><br><br>
+
+        <label for="parameter">Parameter:</label>
+        <select name="parameter" id="parameter">
+            <!-- Options will be populated dynamically using JavaScript -->
+        </select><br><br>
+
+        <label for="input_values">Enter Input Value(s) (comma-separated):</label>
+        <input type="text" name="input_values" id="input_values"><br><br>
+
+        <input type="button" value="Predict" onclick="predict()">
+    </form>
+
+    <div id="predictionResults"></div>
+
+    <script>
+        function predict() {
+            var form = document.getElementById("predictionForm");
+            var formData = new FormData(form);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/predict", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("predictionResults").innerHTML = xhr.responseText;
+                }
+            };
+
+            xhr.send(new URLSearchParams(formData).toString());
+        }
+        document.getElementById("sample_type").addEventListener("change", function () {
+            var sampleType = this.value;
+            var parameterSelect = document.getElementById("parameter");
+            parameterSelect.innerHTML = ""; 
+            var parameters = {
+                "blood": {"hbblood": "Hbblood",
+                        "calcium": "Calcium",
+                        "glucose": "Glucose",
+                        "haemoglobin": "HB"
+                },
+                "serum": {
+                    "totalproteinserum": "Total Protein", 
+                    "glucoseserum": "Glucose", 
+                    "albuminserum": "Albumin", 
+                    "calciumserum": "Calcium"
+                },
+                "urine": {
+                    "glucoseurine": "Glucose", 
+                    "albuminurine": "Albumin", 
+                    "microproteinurine": "Micro Protein"
+                }
+            };
+            for (var key in parameters[sampleType]) {
+                var option = document.createElement("option");
+                option.value = key;
+                option.text = parameters[sampleType][key];
+                parameterSelect.appendChild(option);
+            }
+        });
+        document.getElementById("sample_type").dispatchEvent(new Event('change'));
+    </script>
+</body>
+</html>
