@@ -4,30 +4,30 @@ from joblib import load
 from tabulate import tabulate
 app = Flask(__name__)
 models = {
-    'calcium':load('regressionmodel/RandomForest_ModelCa.joblib'),
-    'glucose':load('regressionmodel/RandomForest_ModelGl.joblib'),
-    'haemoglobin':load('regressionmodel/RandomForest_ModelHb.joblib'),
-    'albuminserum': load('regressionmodel/RandomForest_Modelalb.joblib'),
-    'calciumserum': load('regressionmodel/RandomForest_Modelcalserum.joblib'),
-    'totalproteinserum': load('regressionmodel/RandomForest_Modeltpserum.joblib'),
-    'glucoseserum': load('regressionmodel/RandomForest_ModelGlucserum.joblib'),
-    'albuminurine': load('regressionmodel/RandomForest_Modelalburine.joblib'),
-    'glucoseurine': load('regressionmodel/RandomForest_ModelGlucurine.joblib'),
-    'microproteinurine': load('regressionmodel/RandomForest_Modelmpurine.joblib'),
-    'hbblood': load('regressionmodel/RandomForest_Modelhbblood.joblib')  # Load the new hbblood model
+    'calcium':load('RandomForest_ModelCa.joblib'),
+    'glucose':load('RandomForest_ModelGl.joblib'),
+    'haemoglobin':load('RandomForest_ModelHb.joblib'),
+    'albuminserum': load('RandomForest_Modelalb.joblib'),
+    'calciumserum': load('RandomForest_Modelcalserum.joblib'),
+    'totalproteinserum': load('RandomForest_Modeltpserum.joblib'),
+    'glucoseserum': load('RandomForest_ModelGlucserum.joblib'),
+    'albuminurine': load('RandomForest_Modelalburine.joblib'),
+    'glucoseurine': load('RandomForest_ModelGlucurine.joblib'),
+    'microproteinurine': load('RandomForest_Modelmpurine.joblib'),
+    'hbblood': load('RandomForest_Modelhbblood.joblib')  # Load the new hbblood model
 }
 datasets = {
-    'calcium': pd.read_csv("interpolatedcsv/interpolatedca.csv"),
-    'glucose': pd.read_csv("interpolatedcsv/interpolatedgl.csv"),
-    'haemoglobin': pd.read_csv("interpolatedcsv/interpolatedHb.csv"),
-    'albuminserum': pd.read_csv("interpolatedcsv/interpolatedalb.csv"),
-    'calciumserum': pd.read_csv("interpolatedcsv/interpolatedcals.csv"),
-    'totalproteinserum': pd.read_csv("interpolatedcsv/interpolatedtpser.csv"),
-    'glucoseserum': pd.read_csv("interpolatedcsv/interpolatedGlucser.csv"),
-    'albuminurine': pd.read_csv("interpolatedcsv/interpolatedalbu.csv"),
-    'glucoseurine': pd.read_csv("interpolatedcsv/interpolatedGlucu.csv"),
-    'microproteinurine': pd.read_csv("interpolatedcsv/interpolatedmpu.csv"),
-    'hbblood': pd.read_csv("interpolatedcsv/interpolatedhbblood.csv")  # Load the new hbblood dataset
+    'calcium': pd.read_csv("interpolatedca.csv"),
+    'glucose': pd.read_csv("interpolatedgl.csv"),
+    'haemoglobin': pd.read_csv("interpolatedHb.csv"),
+    'albuminserum': pd.read_csv("interpolatedalb.csv"),
+    'calciumserum': pd.read_csv("interpolatedcals.csv"),
+    'totalproteinserum': pd.read_csv("interpolatedtpser.csv"),
+    'glucoseserum': pd.read_csv("interpolatedGlucser.csv"),
+    'albuminurine': pd.read_csv("interpolatedalbu.csv"),
+    'glucoseurine': pd.read_csv("interpolatedGlucu.csv"),
+    'microproteinurine': pd.read_csv("interpolatedmpu.csv"),
+    'hbblood': pd.read_csv("interpolatedhbblood.csv")  # Load the new hbblood dataset
 }
 def predict_concentration_four_values(model, df, row_values):
     if len(row_values) == 1:
