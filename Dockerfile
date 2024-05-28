@@ -7,37 +7,31 @@ COPY requirements.txt ./
 # Install the dependencies
 RUN pip install -r requirements.txt
 
-# Create a directory for the CSV files
-RUN mkdir -p interpolatedcsv
-
-# Create a directory for the model files
-RUN mkdir -p regressionmodel
-
 # Copy the CSV files into the container
-COPY interpolatedcsv/interpolatedca.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedHb.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedgl.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedalb.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedalbu.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedcals.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedGlucser.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedGlucu.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedtpser.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedhbblood.csv /interpolatedcsv/
-COPY interpolatedcsv/interpolatedmpu.csv /interpolatedcsv/
+COPY interpolatedca.csv /
+COPY interpolatedHb.csv /
+COPY interpolatedgl.csv /
+COPY interpolatedalb.csv /
+COPY interpolatedalbu.csv /
+COPY interpolatedcals.csv /
+COPY interpolatedGlucser.csv /
+COPY interpolatedGlucu.csv /
+COPY interpolatedtpser.csv /
+COPY interpolatedhbblood.csv /
+COPY interpolatedmpu.csv /
 
 # Copy the model files into the container
-COPY regressionmodel/RandomForest_ModelCa.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_ModelHb.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_ModelGl.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_Modelalb.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_Modelalburine.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_Modeltpserum.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_Modelcalserum.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_ModelGlucserum.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_ModelGlucurine.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_Modelhbblood.joblib /regressionmodel/
-COPY regressionmodel/RandomForest_Modelmpurine.joblib /regressionmodel/
+COPY RandomForest_ModelCa.joblib /
+COPY RandomForest_ModelHb.joblib /
+COPY RandomForest_ModelGl.joblib /
+COPY RandomForest_Modelalb.joblib /
+COPY RandomForest_Modelalburine.joblib /
+COPY RandomForest_Modeltpserum.joblib /
+COPY RandomForest_Modelcalserum.joblib /
+COPY RandomForest_ModelGlucserum.joblib /
+COPY RandomForest_ModelGlucurine.joblib /
+COPY RandomForest_Modelhbblood.joblib /
+COPY RandomForest_Modelmpurine.joblib /
 
 COPY 10model.py /10model.py
 COPY 10model.html /10model.html
